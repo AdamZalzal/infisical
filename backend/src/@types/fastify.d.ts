@@ -111,6 +111,7 @@ declare module "fastify" {
       secretApprovalPolicy: TSecretApprovalPolicyServiceFactory;
       secretApprovalRequest: TSecretApprovalRequestServiceFactory;
       secretRotation: TSecretRotationServiceFactory;
+      secretSharing: TSecretSharingServiceFactory;
       snapshot: TSecretSnapshotServiceFactory;
       saml: TSamlConfigServiceFactory;
       scim: TScimServiceFactory;
