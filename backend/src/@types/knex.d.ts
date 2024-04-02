@@ -173,6 +173,8 @@ import {
   TServiceTokens,
   TServiceTokensInsert,
   TServiceTokensUpdate,
+  TSharedSecrets,
+  TSharedSecretsUpdate,
   TSuperAdmin,
   TSuperAdminInsert,
   TSuperAdminUpdate,
@@ -395,5 +397,10 @@ declare module "knex/types/tables" {
       TSecretVersionTagJunctionInsert,
       TSecretVersionTagJunctionUpdate
     >;
+    [TableName.SharedSecrets]: Knex.CompositeTableType<
+    TSharedSecrets,
+    TSharedSecretsInsert,
+    TSharedSecretsUpdate
+  >;
   }
 }
