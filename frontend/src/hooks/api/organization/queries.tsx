@@ -404,3 +404,50 @@ export const useDeleteOrgById = () => {
     }
   });
 };
+
+export const useCreateSharedSecret = () => {
+  return useMutation({
+    mutationFn: async ({
+      data,
+      expiration,
+      userId
+    }: {
+      data: string;
+      expiration: string;
+      userId: string;
+    }) => {
+      const {
+        data: { sharedSecretId }
+      } = await apiRequest.post("/api/v1/secret-sharing", {
+        data,
+        userId,
+        expiration
+      });
+
+      return sharedSecretId;
+    }
+  });
+};
+
+export const useSelectSharedSecret = (sharedSecretId: string) => {
+  return useQuery({
+    queryKey: [sharedSecretId],
+    cacheTime: 0,
+    queryFn: async () => {
+      if (sharedSecretId === "") return undefined;
+      try {
+        const { data } = await apiRequest.get<any>(`/api/v1/secret-sharing/${sharedSecretId}`);
+        return {
+          secret: data.sharedSecret,
+          error: false
+        };
+      } catch (err) {
+        return {
+          secret: undefined,
+          error: true
+        };
+      }
+    },
+    enabled: true
+  });
+};
